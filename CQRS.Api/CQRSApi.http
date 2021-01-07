@@ -1,0 +1,18 @@
+@host = https://localhost:5001
+@api = {{host}}/api
+@carsApi = {{api}}/CQRS/Cars
+@carId = 1
+
+
+### Get information about car by id
+GET  {{carsApi}}/{{carId}} HTTP/1.1
+Content-Type: application/json
+
+
+### Add new car
+POST {{carsApi}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "Name": "BMW"
+}
