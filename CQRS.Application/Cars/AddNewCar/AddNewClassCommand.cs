@@ -2,16 +2,16 @@
 
 namespace CQRS.Application.Cars.AddNewCar
 {
-    public sealed record AddNewClassCommand(string Name, int YearOfProduction) : ICommand<long>;
+    public sealed record AddNewClassCommand(string Brand, int YearOfProduction) : ICommand<long>;
     //Commented version for purist person :)
     //public sealed class AddNewClassCommand : ICommand<long>
     //{
-    //    public string Name { get; }
+    //    public string Brand { get; }
     //    public int YearOfProduction { get; }
 
-    //    public AddNewClassCommand(string name, int yearOfProduction)
+    //    public AddNewClassCommand(string brand, int yearOfProduction)
     //    {
-    //        Name = name;
+    //        Brand = brand;
     //        YearOfProduction = yearOfProduction;
     //    }
     //}

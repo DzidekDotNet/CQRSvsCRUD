@@ -1,6 +1,7 @@
 ﻿using CQRS.Application.Cars.AddNewCar;
 using CQRS.Application.Common.Commands;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -34,9 +35,7 @@ namespace CQRS.Api.Cars
         [ProducesResponseType(typeof(long), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> AddNew([FromBody] AddNewCarRequest newCar)
         {
-            //AddNewClassCommandHandler handler = new AddNewClassCommandHandler();
-            //long newCarId = await handler.Handle(new AddNewClassCommand(newCar.Name, newCar.YearOfProduction));
-            long newCarId = await commandDispatcher.Send(new AddNewClassCommand(newCar.Name, newCar.YearOfProduction));
+            long newCarId = await commandDispatcher.Send(new AddNewClassCommand(newCar.Brand, newCar.YearOfProduction));
 
             return CreatedAtAction(nameof(Get), new { carId = newCarId }, newCarId);
         }
@@ -46,12 +45,25 @@ namespace CQRS.Api.Cars
         /// </summary>
         /// <param name="carId">car id</param>
         /// <returns>Returns information about car</returns>
-        /// <response code="200">Returns if car information was collected </response>
+        /// <response code="200">Returns if car information was collected</response>
         /// <response code="404">Returns when car was not found</response>
         [HttpGet("{carId}")]
-        public ActionResult Get(long carId)
+        public IActionResult Get(long carId)
         {
-            return Ok("x");
+            CarDTO car = new CarDTO(carId, "BMW", 1999);
+            return Ok(car);
+        }
+
+        /// <summary>
+        /// Get list of cars
+        /// </summary>
+        /// <returns>Returns list of cars</returns>
+        /// <response code="200">Returns if cars list was collected</response>
+        [HttpGet()]
+        public IActionResult GetAll()
+        {
+            IEnumerable<CarRowDTO> cars = new List<CarRowDTO>() { new CarRowDTO(1, "BMW", 1999), new CarRowDTO(2, "Audi", 2005) };
+            return Ok(cars);
         }
     }
 }
