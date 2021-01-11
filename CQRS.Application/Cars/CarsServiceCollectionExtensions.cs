@@ -8,7 +8,7 @@ namespace CQRS.Application.Cars.AddNewCar
         internal static IServiceCollection AddCars(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddTransient<ICommandHandler<AddNewClassCommand, long>, AddNewClassCommandHandler>();
+                .AddTransient<ICommandHandler<AddNewCarCommand, long>, AddNewCarCommandHandler>();
 
             return serviceCollection;
         }

@@ -1,4 +1,6 @@
-﻿using CQRS.Application.Common.Commands;
+﻿using CQRS.Application.Cars.AddNewCar;
+using CQRS.Application.Common.Commands;
+using CQRS.Infrastructure.Cars;
 using CQRS.Infrastructure.Commands;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +11,8 @@ namespace CQRS.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddTransient<ICommandDispatcher, CommandDispatcher>();
+                .AddTransient<ICommandDispatcher, CommandDispatcher>()
+                .AddSingleton<IAddNewCarRepository, CarRepository>();
 
             return serviceCollection;
         }

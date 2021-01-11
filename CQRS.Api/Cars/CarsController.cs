@@ -35,7 +35,7 @@ namespace CQRS.Api.Cars
         [ProducesResponseType(typeof(long), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> AddNew([FromBody] AddNewCarRequest newCar)
         {
-            long newCarId = await commandDispatcher.Send(new AddNewClassCommand(newCar.Brand, newCar.YearOfProduction));
+            long newCarId = await commandDispatcher.Send(new AddNewCarCommand(newCar.Brand, newCar.YearOfProduction));
 
             return CreatedAtAction(nameof(Get), new { carId = newCarId }, newCarId);
         }
