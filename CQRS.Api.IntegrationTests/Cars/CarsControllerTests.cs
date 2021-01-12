@@ -9,34 +9,34 @@ using Xunit.Categories;
 
 namespace CQRS.Api.IntegrationTests.Cars
 {
-    [IntegrationTest]
-    public class CarsControllerTests : CarTestBase
-    {
-        public CarsControllerTests(WebApplicationFactory<Startup> factory) : base(factory)
-        {
-        }
+	[IntegrationTest]
+	public class CarsControllerTests : CarTestBase
+	{
+		public CarsControllerTests(WebApplicationFactory<Startup> factory) : base(factory)
+		{
+		}
 
-        [Fact]
-        public async void AddNewCar_ShouldAddNewCar()
-        {
-            IEnumerable<CarRowDTO> carsOnBegining = await GetCars();
-            carsOnBegining.Count().Should().Be(0);
+		[Fact]
+		public async void AddNewCar_ShouldAddNewCar()
+		{
+			IEnumerable<CarRowDTO> carsOnBegining = await GetCars();
+			carsOnBegining.Count().Should().Be(0);
 
-            await AddCar("BMW", 2000);
+			await AddCar("BMW", 2000);
 
-            IEnumerable<CarRowDTO> carsAfterNewCarAddedBmw = await GetCars();
-            carsAfterNewCarAddedBmw.Count().Should().Be(1);
-            carsAfterNewCarAddedBmw.ElementAt(0).Brand.Should().Be("BMW");
-            carsAfterNewCarAddedBmw.ElementAt(0).YearOfProduction.Should().Be(2000);
+			IEnumerable<CarRowDTO> carsAfterNewCarAddedBmw = await GetCars();
+			carsAfterNewCarAddedBmw.Count().Should().Be(1);
+			carsAfterNewCarAddedBmw.ElementAt(0).Brand.Should().Be("BMW");
+			carsAfterNewCarAddedBmw.ElementAt(0).YearOfProduction.Should().Be(2000);
 
-            CarDTO car = await GetCar(carsAfterNewCarAddedBmw.ElementAt(0).Id);
-            car.Brand.Should().Be("BMW");
-            car.YearOfProduction.Should().Be(2000);
+			CarDTO car = await GetCar(carsAfterNewCarAddedBmw.ElementAt(0).Id);
+			car.Brand.Should().Be("BMW");
+			car.YearOfProduction.Should().Be(2000);
 
-            await AddCar("Audi", 2009);
+			await AddCar("Audi", 2009);
 
-            IEnumerable<CarRowDTO> carsAfterNewCarAddedAudi = await GetCars();
-            carsAfterNewCarAddedAudi.Count().Should().Be(2);
-        }
-    }
+			IEnumerable<CarRowDTO> carsAfterNewCarAddedAudi = await GetCars();
+			carsAfterNewCarAddedAudi.Count().Should().Be(2);
+		}
+	}
 }

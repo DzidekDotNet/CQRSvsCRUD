@@ -1,4 +1,4 @@
 ﻿namespace CQRS.Domain.Cars
 {
-    public sealed record NewCar(string Brand, int YearOfProduction);
+	public sealed record NewCar(string Brand, int YearOfProduction);
 }

@@ -8,15 +8,15 @@ using Xunit;
 
 namespace CQRS.Api.IntegrationTests
 {
-    public abstract class TestBase : IClassFixture<WebApplicationFactory<Startup>>
-    {
-        protected readonly HttpClient client;
-        protected TestBase(WebApplicationFactory<Startup> factory, Action<IServiceCollection> servicesConfiguration)
-        {
-            client = factory.WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureTestServices(servicesConfiguration);
-            }).CreateClient();
-        }
-    }
+	public abstract class TestBase : IClassFixture<WebApplicationFactory<Startup>>
+	{
+		protected readonly HttpClient client;
+		protected TestBase(WebApplicationFactory<Startup> factory, Action<IServiceCollection> servicesConfiguration)
+		{
+			client = factory.WithWebHostBuilder(builder =>
+			{
+				builder.ConfigureTestServices(servicesConfiguration);
+			}).CreateClient();
+		}
+	}
 }
