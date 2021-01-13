@@ -11,16 +11,12 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": false,
-      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "CQRS_vs_CRUD": {
       "commandName": "Project",
-      "launchBrowser": false,
-      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -28,12 +24,11 @@
     },
     "Docker": {
       "commandName": "Docker",
-      "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/",
       "publishAllPorts": true,
-      "useSSL": true,
       "httpPort": 5000,
-      "sslPort":  5001
+      "useSSL": true,
+      "sslPort": 5001
     }
   }
 }
