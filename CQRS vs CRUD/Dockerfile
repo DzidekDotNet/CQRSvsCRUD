@@ -16,7 +16,14 @@ RUN dotnet build "CQRS vs CRUD.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "CQRS vs CRUD.csproj" -c Release -o /app/publish
 
-FROM base AS final
+FROM base AS waitForMsSql
+RUN apt-get update && apt-get install -y wget
+ENV DOCKERIZE_VERSION v0.6.1
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+FROM waitForMsSql AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "CQRS vs CRUD.dll"]

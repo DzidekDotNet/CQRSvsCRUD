@@ -5,6 +5,8 @@ services:
         context: .
         dockerfile: CQRS vs CRUD/Dockerfile
     image: web
+    entrypoint: []
+    command: sh -c "dockerize -wait tcp://mssql:1433 -timeout 300s -wait-retry-interval 5s dotnet 'CQRS vs CRUD.dll'"
     ports:
       - "5001:443"
       - "5000:80"
